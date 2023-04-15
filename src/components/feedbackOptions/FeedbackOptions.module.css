@@ -2,6 +2,7 @@
   display: flex;
   gap: 16px;
   margin-top: 30px;
+  justify-content: center;
 }
 
 .feedbackButton {
@@ -13,9 +14,9 @@
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   text-transform: capitalize;
   font-size: 30px;
-  background-color: white;
+  background-color: rgb(170, 224, 245);
 }
 
 .feedbackButton:active {
-  background-color: blue;
+  background-color: rgb(79, 79, 232);
 }

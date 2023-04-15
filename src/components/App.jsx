@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Section from './section/Section';
 import Statistics from './statistics/Statistics';
 import FeedbackOptions from './feedbackOptions/FeedbackOptions';
 import Notification from './notification/Notification';
+import css from './App.module.css'
 
 export function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [positivePercentage, setPositivePercentage] = useState(0);
 
   const options = { good, neutral, bad };
 
@@ -27,26 +30,16 @@ export function App() {
     }
   };
 
-  const countTotalFeedback = () => {
-    return good + neutral + bad;
-  };
-
-  const countPositiveFeedbackPercentage = () => {
-    return (good / (good + neutral + bad)) * 100;
-  };
-
-  const total = countTotalFeedback();
-  const positivePercentage = countPositiveFeedbackPercentage();
+  useEffect(() => {
+    if (good === 0 && neutral === 0 && bad === 0) {
+      return;
+    }
+    setTotal(good + neutral + bad);
+    setPositivePercentage((good / (good + neutral + bad)) * 100);
+  }, [good, neutral, bad]);
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        padding: '80px 40px 40px',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
+    <div className={css.app}>
       <Section title="Please leave feedback">
         <FeedbackOptions
           options={Object.keys(options)}
